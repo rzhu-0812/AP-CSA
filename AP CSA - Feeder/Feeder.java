@@ -15,8 +15,6 @@ public class Feeder {
 
             currentFood -= foodAmount * numBirds;
 
-            System.out.println(foodAmount);
-
             if (currentFood < 0) {
                 currentFood = 0;
             }
@@ -25,9 +23,16 @@ public class Feeder {
         }
     }
 
-    public int simulateManyDays(int numBirds, int numDays) 
-    {
-        return 0;
+    public int simulateManyDays(int numBirds, int numDays) {
+        for (int i = 0; i < numDays; i++) {
+            simulateOneDay(numBirds);
+
+            if (currentFood == 0) {
+                return 0;
+            }
+        }
+        
+        return currentFood;
     }
 
 }
