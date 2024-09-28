@@ -28,7 +28,6 @@ public class Main {
         WordChecker wc2 = new WordChecker(strList2);
         WordChecker wc3 = new WordChecker(strList3);
         
-
         System.out.println(wc1.isWordChain());
         System.out.println(wc2.isWordChain());
         System.out.println(wc3.createList("cat").toString());
