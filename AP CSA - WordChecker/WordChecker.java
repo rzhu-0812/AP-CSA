@@ -7,6 +7,10 @@ public class WordChecker {
         this.wordList = wordList;
     }
 
+    public void setWordList(ArrayList<String> newList) {
+        wordList = newList;
+    }
+
     public boolean isWordChain() {
         for (int i = 0; i < wordList.size() - 1; i++) {
             if (!(wordList.get(i + 1).contains(wordList.get(i)))) {
