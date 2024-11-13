@@ -25,7 +25,7 @@ public class WordChecker {
 
         for (String str : wordList) {
             if (str.startsWith(target)) {
-                newStrList.add(str);
+                newStrList.add(str.substring(target.length()));
             }
         }
 
