@@ -8,7 +8,8 @@ public class Algorithm {
         int totalTwoDigits = 0, totalGreaterFiveHundred = 0;
         int maxNum = Integer.MIN_VALUE, minNum = Integer.MAX_VALUE, sum = 0;
         double average;
-        int maxOccurrences = 0, maxOccurNum = 0;
+        int maxOccurrences = 0;
+        ArrayList<Integer> maxOccurNum = new ArrayList<>();
         HashMap<Integer, Integer> numOccurrences = new HashMap<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader("Numbers.txt"))) {
@@ -37,7 +38,10 @@ public class Algorithm {
         for (Map.Entry<Integer, Integer> entry : numOccurrences.entrySet()) {
             if (entry.getValue() > maxOccurrences) {
                 maxOccurrences = entry.getValue();
-                maxOccurNum = entry.getKey();
+                maxOccurNum.clear();
+                maxOccurNum.add(entry.getKey());
+            } else if (entry.getValue() == maxOccurrences) {
+                maxOccurNum.add(entry.getKey());
             }
         }
 
@@ -49,7 +53,7 @@ public class Algorithm {
         System.out.println("Smallest number: " + minNum);
         System.out.println("Sum of all numbers: " + sum);
         System.out.println("Average: " + average);
-        System.out.println("Number with max occurrences: " + maxOccurNum + " (" + maxOccurrences + " occurrences)");
+        System.out.println("Mode(s): " + maxOccurNum + " (" + maxOccurrences + " occurrences)");
 
     }
 }
