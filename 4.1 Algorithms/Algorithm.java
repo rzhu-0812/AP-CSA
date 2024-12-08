@@ -1,6 +1,6 @@
-import java.util.*;
 import java.io.*;
 import java.math.*;
+import java.util.ArrayList;
 
 public class Algorithm {
     public static void main(String[] args) {
@@ -10,7 +10,11 @@ public class Algorithm {
         double average;
         int maxOccurrences = 0;
         ArrayList<Integer> maxOccurNum = new ArrayList<>();
-        HashMap<Integer, Integer> numOccurrences = new HashMap<>();
+
+        int[][] numOccurrences = new int[1000][2];
+        for (int i = 0; i < numOccurrences.length; i++) {
+            numOccurrences[i][0] = i;
+        }
 
         try (BufferedReader reader = new BufferedReader(new FileReader("Numbers.txt"))) {
             String line;
@@ -27,21 +31,21 @@ public class Algorithm {
                 maxNum = Math.max(maxNum, currNum);
                 minNum = Math.min(minNum, currNum);
 
-                numOccurrences.put(currNum, numOccurrences.getOrDefault(currNum, 0) + 1);
+                numOccurrences[currNum][1]++;
             }
         } catch (IOException e) {
             System.out.println("Unable to read the file.");
         }
-        
+
         average = ((new BigDecimal((double) sum / (totalEven + totalOdd))).setScale(3, RoundingMode.HALF_UP)).doubleValue();
 
-        for (Map.Entry<Integer, Integer> entry : numOccurrences.entrySet()) {
-            if (entry.getValue() > maxOccurrences) {
-                maxOccurrences = entry.getValue();
+        for (int[] entry : numOccurrences) {
+            if (entry[1] > maxOccurrences) {
+                maxOccurrences = entry[1];
                 maxOccurNum.clear();
-                maxOccurNum.add(entry.getKey());
-            } else if (entry.getValue() == maxOccurrences) {
-                maxOccurNum.add(entry.getKey());
+                maxOccurNum.add(entry[0]);
+            } else if (entry[1] == maxOccurrences && entry[1] > 0) {
+                maxOccurNum.add(entry[0]);
             }
         }
 
@@ -54,6 +58,5 @@ public class Algorithm {
         System.out.println("Sum of all numbers: " + sum);
         System.out.println("Average: " + average);
         System.out.println("Mode(s): " + maxOccurNum + " (" + maxOccurrences + " occurrences)");
-
     }
 }
