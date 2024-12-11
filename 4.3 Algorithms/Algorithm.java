@@ -1,23 +1,18 @@
 import java.io.*;
-import java.util.*;
-
 public class Algorithm{
     public static void main(String[] args) {
-        int twoLetterWords = 0, palindromes = 0;
-        ArrayList<String> longestWords = new ArrayList<>();
+        int twoLetterWords = 0, longestWords = 0, longestWordLen = 0, palindromes = 0;
 
         try (BufferedReader reader = new BufferedReader(new FileReader("words.txt"))) {
             String word;
             while((word = reader.readLine()) != null) {
                 if (word.length() == 2) twoLetterWords++;
 
-                if (longestWords.size() == 0) {
-                    longestWords.add(word);
-                } else if (word.length() > longestWords.get(0).length()) {
-                    longestWords.clear();
-                    longestWords.add(word);
-                } else if (word.length() == longestWords.get(0).length()) {
-                    longestWords.add(word);
+                if (word.length() > longestWordLen) {
+                    longestWords = 1;
+                    longestWordLen = word.length();
+                } else if (word.length() == longestWordLen) {
+                    longestWords++;
                 }
 
                 StringBuilder s = new StringBuilder(word);
@@ -30,7 +25,7 @@ public class Algorithm{
         }
 
         System.out.println("Total number of two letter words: " + twoLetterWords);
-        System.out.println("Longest word(s): " + longestWords.toString() + " (" + longestWords.get(0).length() + " chars)");
+        System.out.println("Total longest word: " + longestWords + " (" + longestWordLen + " chars)");
         System.out.println("Total number of palindromes: " + palindromes);
     }
 }
