@@ -21,8 +21,6 @@ public class WordMatch {
         int guessOneScore = scoreGuess(guess1);
         int guessTwoScore = scoreGuess(guess2);
 
-        return (guessOneScore > guessTwoScore) ? guess1 : 
-               (guessTwoScore > guessOneScore) ? guess2 :
-               (guess1.compareTo(guess2) > 0) ? guess1 : guess2;
+        return (guessOneScore > guessTwoScore || (guessOneScore == guessTwoScore && guess1.compareTo(guess2) > 0)) ? guess1 : guess2;
     }
 }
